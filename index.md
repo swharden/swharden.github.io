@@ -1,3 +1,7 @@
-# Index
+This page is `index.md`. 
 
-test page with **markdown** and it _works_!
+It uses **markdown** and it _works_!
+
+### Links
+
+* [Core Concepts](./concepts)
