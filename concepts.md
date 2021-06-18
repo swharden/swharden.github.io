@@ -1,4 +1,9 @@
-# Core Concepts
+---
+title: Core Concepts
+date: 2020-09-24 20:30:00
+---
+
+# Github Pages Core Concepts
 
 * [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) (or [PDF](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf))
 * [How to Embed YouTube](https://thisisa.blog/how-to-embed-media-github-pages)
