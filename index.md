@@ -15,6 +15,8 @@ This page was written using **markdown** and it _works_!
 * Write some articles
 
 ### Eventually (optional)
+* Customize the layout
+* Google Analytics
 * Get a domain name
 * Get the Jekyll build running locally
 * Move hosting from GitHub Pages to Netlify
