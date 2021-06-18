@@ -6,7 +6,13 @@
 * [_config.yml](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) (Jekyll configuration)
 * [Front matter](https://jekyllrb.com/docs/front-matter/)
 
-## Example Source Code
+### Images
+* Store page content as markdown files in `/`
+* Store image files in `/assets/images/`
+
+![](/assets/images/art.jpg)
+
+### Source Code
 
 ```cs
 // source code
@@ -19,7 +25,7 @@ private void Form1_DragDrop(object sender, DragEventArgs e)
 }
 ```
 
-### Example YouTube
+### YouTube
 <iframe src="https://www.youtube.com/embed/1ygdAiDxKfI" 
     width="560" 
     height="315"
