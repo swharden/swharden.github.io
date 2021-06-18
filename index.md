@@ -1,6 +1,6 @@
 ---
 title: Home Page
-description: Github Pages Demo
+description: Main page for Scott's GitHub Pages demo
 ---
 
 This page was written using **markdown** and it _works_!
