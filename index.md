@@ -7,6 +7,9 @@ This page was written using **markdown** and it _works_!
 
 > 🚀 **NOTE: This is a test website** I made to help my friend Jim get started writing articles using Markdown and GitHub Pages
 
+### Source Code 
+* [https://github.com/swharden/swharden.github.io](https://github.com/swharden/swharden.github.io)
+
 ### First Steps
 * Review [these core concepts](concepts)
 * Write some articles
