@@ -1,10 +1,13 @@
-This page is `index.md`. 
+---
+title: Home Page
+description: Github Pages Demo
+---
 
-It uses **markdown** and it _works_!
+This page was written using **markdown** and it _works_!
 
-I made this page as a test before working with Jim.
+> 🚀 **NOTE: This is a test website** I made to help my friend Jim get started writing articles using Markdown and GitHub Pages
 
-### Next Steps
+### First Steps
 * Review [these core concepts](concepts)
 * Write some articles
 
