@@ -5,7 +5,7 @@ It uses **markdown** and it _works_!
 I made this page as a test before working with Jim.
 
 ### Next Steps
-* Review [these core concepts](./concepts)
+* Review [these core concepts](concepts)
 * Write some articles
 
 ### Eventually (optional)
