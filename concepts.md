@@ -1,5 +1,6 @@
 ---
 title: Core Concepts
+description: Links and resources for getting started writing articles using GitHub Pages
 date: 2020-09-24 20:30:00
 ---
 
