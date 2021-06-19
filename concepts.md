@@ -38,3 +38,15 @@ private void Form1_DragDrop(object sender, DragEventArgs e)
     frameborder="0" 
     allowfullscreen>
 </iframe>
+
+### Tables
+
+ Name               | Charge | Conductivity (E-4) | C0 (mM)      | CL (mM)      
+--------------------|--------|--------------------|--------------|--------------
+ K                  | +1     | 73.5               | 145          | 2.8098265   
+ Na                 | +1     | 50.11              | 13           | 144.9794365 
+ Mg                 | +2     | 53.06              | 1            | 1.9998212   
+ Ca                 | +2     | 59.5               | 0            | 0.9999109   
+ HEPES              | -1     | 22.05              | 5            | 4.9990023   
+ Gluconate          | -1     | 24.255             | 145          | 0           
+ Cl                 | -1     | 76.31              | 10           | 148.789725
