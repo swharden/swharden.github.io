@@ -73,7 +73,16 @@
 
         .event-legend-swatch {
             width: 18px;
+            height: 10px;
+        }
+
+        .event-legend-swatch.line {
             border-top: 2px dashed currentColor;
+        }
+
+        .event-legend-swatch.box {
+            background: var(--event-fill);
+            border: 1px solid currentColor;
         }
 
         @media (max-width: 560px) {
@@ -138,13 +147,10 @@
                             { day: -5, wbc: 7.93 },
                         ];
 
-                        // Vertical event markers — comment out future ones until they happen
-                        // type: "line" draws a single dashed vertical line
+                        // Event markers — comment out future ones until they happen
+                        // type: "box" shades a day range; type: "line" draws a dashed vertical line
                         const EVENTS = [
-                            { day: -5, label: "Chemo", type: "line", color: "#f59e0b" },
-                            { day: -4, label: "Chemo", type: "line", color: "#f59e0b" },
-                            { day: -3, label: "Chemo", type: "line", color: "#f59e0b" },
-                            { day: -2, label: "Chemo", type: "line", color: "#f59e0b" },
+                            { day: -5.5, dayEnd: -1.5, label: "Daily Chemo", type: "box", color: "#f59e0b", fill: "rgba(245, 158, 11, 0.16)" },
                             { day: 0, label: "Transplant", type: "line", color: "#9f7aea" },
                         ];
                     </script>
@@ -173,7 +179,7 @@
                         <a href='https://en.wikipedia.org/wiki/Total_body_irradiation'>total body radiation</a>
                     </li>
                     <li><strong>2026 May:</strong>
-                        PET CT indicates temporary remission
+                        PET CT indicates remission
                     </li>
                     <li><strong>2026 Apr:</strong>
                         Chemotherapy:
@@ -446,7 +452,8 @@
             item.style.color = ev.color;
 
             const swatch = document.createElement('span');
-            swatch.className = 'event-legend-swatch';
+            swatch.className = `event-legend-swatch ${ev.type}`;
+            swatch.style.setProperty('--event-fill', ev.fill ?? ev.color + '24');
 
             const label = document.createElement('span');
             label.textContent = ev.label;
@@ -464,6 +471,18 @@
         const annotations = {};
 
         EVENTS.forEach((ev, i) => {
+            if (ev.type === 'box') {
+                annotations['event_' + i] = {
+                    type: 'box',
+                    xMin: ev.day,
+                    xMax: ev.dayEnd,
+                    backgroundColor: ev.fill ?? ev.color + '24',
+                    borderWidth: 0,
+                    drawTime: 'beforeDatasetsDraw'
+                };
+                return;
+            }
+
             annotations['event_' + i] = {
                 type: 'line', scaleID: 'x', value: ev.day,
                 borderColor: ev.color, borderWidth: 1.5, borderDash: [4, 3],
