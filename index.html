@@ -5,7 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Scott W Harden - Status</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script>
+        const TRANSPLANT_DATE = "2025-06-25";
+
+        const READINGS = [
+            { day: -9, wbc: 3.2 },
+            { day: -6, wbc: 4.83 },
+            { day: -5, wbc: 7.93 },
+        ];
+
+        const EVENTS = [
+            { day: -5.5, dayEnd: -1.5, label: "Daily Chemo", type: "box", color: "#f59e0b", fill: "rgba(245, 158, 11, 0.16)" },
+            { day: 0, label: "Transplant", type: "line", color: "#9f7aea" },
+        ];
+    </script>
+
     <link rel=icon href="https://swharden.github.io/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -86,13 +102,6 @@
         }
 
         @media (max-width: 560px) {
-            .card {
-                width: 100vw;
-                min-height: 100vh;
-                border-radius: 0;
-                padding: 20px 12px 18px;
-            }
-
             .chart-wrap {
                 height: min(68vh, 520px);
                 min-height: 380px;
@@ -107,24 +116,36 @@
 
 <body>
     <div class="container" style="max-width: 800px;">
-        <div class="my-5">
+        <div class="my-3">
             <h1 class="text-center">Scott W Harden - Status</h1>
-            <div class="fs-5 w-75 mx-auto text-center" style="text-wrap: balance;">
+            <div class="mx-auto text-center" style="text-wrap: balance;">
                 This page tracks the status of
                 <a href="https://swharden.com/about/">Scott W Harden</a>
                 as he undergoes serious medical treatment in 2026.
             </div>
 
-            <h2 class="mt-5">Latest</h2>
-            <div>
-                Scott is being treated for cancer (Peripheral T-Cell Lymphoma).
-                Treatments have involved antibody therapy,
-                several rounds of chemotherapy,
-                and now an allogenic bone marrow transplant (BMT).
-            </div>
+            <hr />
 
-            <h2 class="mt-5">BMT Progress</h2>
             <p>
+                <strong>Status:</strong>
+                Scott is currently undergoing an allogenic
+                bone marrow transplant to treat relapsed.
+                peripheral T-Cell lymphoma.
+                Scott's bone marrow transplant progress
+                is being tracked with daily blood tests:
+            </p>
+
+            <section>
+                <div class="container py-4">
+                    <div class="chart-wrap">
+                        <canvas id="chart"></canvas>
+                    </div>
+                    <div class="event-legend" id="event-legend"></div>
+                    <div class="updated" id="updated"></div>
+                </div>
+            </section>
+            <p>
+                <strong>Chart:</strong>
                 In an allogenic bone marrow transplant,
                 chemotherapy is used to kill the existing bone marrow,
                 then a donor's stem cells are used to repopulate it.
@@ -133,36 +154,6 @@
                 then rise as the transplanted donor stem cells engraft
                 and begin producing new blood cells.
             </p>
-            <section>
-                <div class="card p-0 m-0 mw-100 border-0">
-
-                    <script>
-                        // Day 0 date, used to convert relative day numbers into x-axis dates
-                        const TRANSPLANT_DATE = "2025-06-25";
-
-                        // Add a new line each day — day 0 = transplant, negative = before
-                        const READINGS = [
-                            { day: -9, wbc: 3.2 },
-                            { day: -6, wbc: 4.83 },
-                            { day: -5, wbc: 7.93 },
-                        ];
-
-                        // Event markers — comment out future ones until they happen
-                        // type: "box" shades a day range; type: "line" draws a dashed vertical line
-                        const EVENTS = [
-                            { day: -5.5, dayEnd: -1.5, label: "Daily Chemo", type: "box", color: "#f59e0b", fill: "rgba(245, 158, 11, 0.16)" },
-                            { day: 0, label: "Transplant", type: "line", color: "#9f7aea" },
-                        ];
-                    </script>
-                    <!-- end editable section -->
-
-                    <div class="chart-wrap">
-                        <canvas id="chart"></canvas>
-                    </div>
-                    <div class="event-legend" id="event-legend"></div>
-                    <div class="updated" id="updated"></div>
-                </div>
-            </section>
 
             <h2 class="mt-5">Timeline</h2>
             <div>
