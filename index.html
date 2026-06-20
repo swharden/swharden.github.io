@@ -5,10 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Scott W Harden - Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
     <link rel=icon href="https://swharden.github.io/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
         a {
             text-decoration: none;
         }
@@ -24,6 +31,67 @@
         h2 {
             font-size: 1.5rem;
             text-decoration: underline;
+        }
+    </style>
+    <style>
+        .chart-wrap {
+            position: relative;
+            height: 390px;
+            width: 100%;
+        }
+
+        #chart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .updated {
+            font-size: 11px;
+            color: #666;
+            text-align: right;
+            margin-top: 16px;
+        }
+
+        .event-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 12px;
+            color: #999;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .event-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .event-legend-swatch {
+            width: 18px;
+            border-top: 2px dashed currentColor;
+        }
+
+        @media (max-width: 560px) {
+            .card {
+                width: 100vw;
+                min-height: 100vh;
+                border-radius: 0;
+                padding: 20px 12px 18px;
+            }
+
+            .chart-wrap {
+                height: min(68vh, 520px);
+                min-height: 380px;
+            }
+
+            .updated {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -43,13 +111,52 @@
                 Scott is being treated for cancer (Peripheral T-Cell Lymphoma).
                 Treatments have involved antibody therapy,
                 several rounds of chemotherapy,
-                and now an allogenic bone marrow transplant.
-                This message was updated June 20, 2026, and the
-                latest details are below:
+                and now an allogenic bone marrow transplant (BMT).
             </div>
 
-            <h2 class="mt-5">Bone Marrow Transplant Progress</h2>
-            <div>[chart]</div>
+            <h2 class="mt-5">BMT Progress</h2>
+            <p>
+                In an allogenic bone marrow transplant,
+                chemotherapy is used to kill the existing bone marrow,
+                then a donor's stem cells are used to repopulate it.
+                White blood cell (WBC) count is a key indicator of recovery.
+                WBC levels fall near zero several days after chemotherapy,
+                then rise as the transplanted donor stem cells engraft
+                and begin producing new blood cells.
+            </p>
+            <section>
+                <div class="card p-0 m-0 mw-100 border-0">
+
+                    <script>
+                        // Day 0 date, used to convert relative day numbers into x-axis dates
+                        const TRANSPLANT_DATE = "2025-06-25";
+
+                        // Add a new line each day — day 0 = transplant, negative = before
+                        const READINGS = [
+                            { day: -9, wbc: 3.2 },
+                            { day: -6, wbc: 4.83 },
+                            { day: -5, wbc: 7.93 },
+                        ];
+
+                        // Vertical event markers — comment out future ones until they happen
+                        // type: "line" draws a single dashed vertical line
+                        const EVENTS = [
+                            { day: -5, label: "Chemo", type: "line", color: "#f59e0b" },
+                            { day: -4, label: "Chemo", type: "line", color: "#f59e0b" },
+                            { day: -3, label: "Chemo", type: "line", color: "#f59e0b" },
+                            { day: -2, label: "Chemo", type: "line", color: "#f59e0b" },
+                            { day: 0, label: "Transplant", type: "line", color: "#9f7aea" },
+                        ];
+                    </script>
+                    <!-- end editable section -->
+
+                    <div class="chart-wrap">
+                        <canvas id="chart"></canvas>
+                    </div>
+                    <div class="event-legend" id="event-legend"></div>
+                    <div class="updated" id="updated"></div>
+                </div>
+            </section>
 
             <h2 class="mt-5">Timeline</h2>
             <div>
@@ -110,7 +217,7 @@
                     <div class="row g-4">
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2025-12-21.jpg'>
                                     <img src="img/2025-12-21.jpg" class="card-img-top" alt="">
                                 </a>
@@ -126,7 +233,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2025-12-19.jpg'>
                                     <img src="img/2025-12-19.jpg" class="card-img-top" alt="">
                                 </a>
@@ -142,7 +249,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2026-03-18.jpg'>
                                     <img src="img/2026-03-18.jpg" class="card-img-top" alt="">
                                 </a>
@@ -158,7 +265,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2025-04-26.jpg'>
                                     <img src="img/2025-04-26.jpg" class="card-img-top" alt="">
                                 </a>
@@ -176,7 +283,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2025-05-04-pet-cts.png'>
                                     <img src="img/2025-05-04-pet-cts.png" class="card-img-top my-5" alt="">
                                 </a>
@@ -194,7 +301,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                            <div class="card gallery-card h-100 shadow-sm">
+                            <div class="card gallery-card h-100 mw-100 shadow-sm">
                                 <a href='img/2025-05-12.jpg'>
                                     <img src="img/2025-05-12.jpg" class="card-img-top" alt="">
                                 </a>
@@ -276,6 +383,187 @@
         Those close to me can
         <a href="https://github.com/swharden/swharden.github.io">edit this page</a> on GitHub
     </footer>
+
+
+    <script>
+        const latest = READINGS[READINGS.length - 1];
+        const wbc = latest?.wbc ?? null;
+        const color = wbc === null ? "#999" : wbc >= 0.5 ? "#22c55e" : wbc >= 0.1 ? "#f59e0b" : "#ef4444";
+        const transplantDate = parseLocalDate(TRANSPLANT_DATE);
+        const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'numeric', day: 'numeric' });
+        const updatedFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const compactChart = window.matchMedia('(max-width: 560px)').matches;
+
+        // Compute x-axis range across readings + events
+        const allDays = [
+            ...READINGS.map(d => d.day),
+            ...EVENTS.flatMap(e => e.dayEnd !== undefined ? [e.day, e.dayEnd] : [e.day]),
+            14
+        ];
+        const xMin = Math.min(...allDays);
+        const xMax = Math.max(...allDays);
+
+        function parseLocalDate(isoDate) {
+            const [year, month, day] = isoDate.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        }
+
+        function dateForDay(day) {
+            const date = new Date(transplantDate);
+            date.setDate(transplantDate.getDate() + day);
+            return date;
+        }
+
+        function formatDayAsDate(day) {
+            return dateFormatter.format(dateForDay(day));
+        }
+
+        document.getElementById('updated').textContent = latest
+            ? "Updated " + updatedFormatter.format(dateForDay(latest.day))
+            : "No readings yet";
+
+        function formatRelativeDay(day) {
+            return day > 0 ? `+${day}` : String(day);
+        }
+
+        function shouldShowAxisLabel(value) {
+            const day = Number(value);
+
+            if (!Number.isInteger(day)) return false;
+            if (!compactChart) return true;
+
+            return day === xMin || day === xMax || day === 0 || (day - xMin) % 4 === 0;
+        }
+
+        const eventLegend = document.getElementById('event-legend');
+        const uniqueEvents = Array.from(
+            new Map(EVENTS.map(ev => [`${ev.label}|${ev.color}`, ev])).values()
+        );
+
+        eventLegend.replaceChildren(...uniqueEvents.map(ev => {
+            const item = document.createElement('span');
+            item.className = 'event-legend-item';
+            item.style.color = ev.color;
+
+            const swatch = document.createElement('span');
+            swatch.className = 'event-legend-swatch';
+
+            const label = document.createElement('span');
+            label.textContent = ev.label;
+
+            item.append(swatch, label);
+            return item;
+        }));
+
+        // Chart.js annotation plugin (inline, no extra CDN needed)
+        // We use the built-in annotation plugin via CDN
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+    <script>
+        // Build annotations from EVENTS
+        const annotations = {};
+
+        EVENTS.forEach((ev, i) => {
+            annotations['event_' + i] = {
+                type: 'line', scaleID: 'x', value: ev.day,
+                borderColor: ev.color, borderWidth: 1.5, borderDash: [4, 3],
+                label: {
+                    display: false, content: ev.label, position: 'start',
+                    color: ev.color, font: { size: 10, weight: '600' },
+                    backgroundColor: 'transparent', yAdjust: -8
+                }
+            };
+        });
+
+        new Chart(document.getElementById('chart'), {
+            type: 'line',
+            data: {
+                datasets: [{
+                    xAxisID: 'x',
+                    data: READINGS.map(d => ({ x: d.day, y: d.wbc })),
+                    borderColor: color,
+                    backgroundColor: color + '14',
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: (ctx) =>
+                        ctx.dataIndex === READINGS.length - 1 ? color : '#fff',
+                    pointBorderColor: color,
+                    pointRadius: (ctx) => ctx.dataIndex === READINGS.length - 1 ? 5 : 3,
+                    pointHoverRadius: 6,
+                    borderWidth: 2.5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: items => formatDayAsDate(items[0].parsed.x),
+                            label: items => " WBC: " + items.parsed.y.toFixed(1) + " × 10⁹/L"
+                        }
+                    },
+                    annotation: { annotations }
+                },
+                scales: {
+                    xDay: {
+                        type: 'linear',
+                        axis: 'x',
+                        position: 'top',
+                        min: xMin,
+                        max: xMax,
+                        grid: { drawOnChartArea: false, color: '#f0f0f0' },
+                        ticks: {
+                            autoSkip: false,
+                            color: '#888',
+                            font: { size: compactChart ? 9 : 10 },
+                            stepSize: 1,
+                            callback: v => shouldShowAxisLabel(v) ? formatRelativeDay(v) : ''
+                        },
+                        title: {
+                            display: true,
+                            text: 'Days Relative to Transplant',
+                            color: '#777',
+                            font: { size: 11, weight: '600' }
+                        }
+                    },
+                    x: {
+                        type: 'linear',
+                        min: xMin,
+                        max: xMax,
+                        grid: { color: '#f0f0f0' },
+                        ticks: {
+                            autoSkip: false,
+                            color: '#bbb',
+                            font: { size: compactChart ? 9 : 10 },
+                            maxRotation: compactChart ? 0 : 45,
+                            minRotation: compactChart ? 0 : 45,
+                            stepSize: 1,
+                            callback: v => shouldShowAxisLabel(v) ? formatDayAsDate(v) : ''
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            color: '#999',
+                            font: { size: 11, weight: '600' }
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        grid: { color: '#f0f0f0' },
+                        ticks: { color: '#bbb', font: { size: 10 } },
+                        title: {
+                            display: true,
+                            text: 'White Blood Cells (K/μL)',
+                            color: '#999',
+                            font: { size: 11, weight: '600' }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
