@@ -92,6 +92,24 @@
         .event-legend-swatch {
             width: 18px;
             height: 10px;
+            position: relative;
+        }
+
+        .event-legend-swatch.wbc-line {
+            border-top: 2.5px solid currentColor;
+            transform: translateY(4px);
+        }
+
+        .event-legend-swatch.wbc-line::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 7px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid currentColor;
         }
 
         .event-legend-swatch.line {
@@ -435,8 +453,12 @@
         const uniqueEvents = Array.from(
             new Map(EVENTS.map(ev => [`${ev.label}|${ev.color}`, ev])).values()
         );
+        const legendItems = [
+            { label: "WBC", type: "wbc-line", color },
+            ...uniqueEvents,
+        ];
 
-        eventLegend.replaceChildren(...uniqueEvents.map(ev => {
+        eventLegend.replaceChildren(...legendItems.map(ev => {
             const item = document.createElement('span');
             item.className = 'event-legend-item';
             item.style.color = ev.color;
