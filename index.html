@@ -492,8 +492,8 @@
                     data: READINGS.map(d => ({ x: d.day, y: d.wbc })),
                     borderColor: color,
                     backgroundColor: color + '14',
-                    fill: true,
-                    tension: 0.3,
+                    fill: false,
+                    tension: 0,
                     pointBackgroundColor: (ctx) =>
                         ctx.dataIndex === READINGS.length - 1 ? color : '#fff',
                     pointBorderColor: color,
