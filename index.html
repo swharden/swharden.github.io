@@ -470,7 +470,7 @@
             if (!Number.isInteger(day)) return false;
             if (!compactChart) return true;
 
-            return day === xMin || day === xMax || day === 0 || (day - xMin) % 4 === 0;
+            return day % 4 === 0;
         }
 
         const eventLegend = document.getElementById('event-legend');
