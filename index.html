@@ -17,12 +17,24 @@
             { day: -4, wbc: 7.40 },
             { day: -3, wbc: 6.93 },
             { day: -2, wbc: 7.43 },
+            { day: -1, wbc: undefined },
+            { day: 0, wbc: undefined },
+            { day: 1, wbc: undefined },
+            { day: 2, wbc: undefined },
+            { day: 3, wbc: undefined },
+            { day: 4, wbc: undefined },
+            { day: 5, wbc: undefined },
+            { day: 6, wbc: undefined },
+            { day: 7, wbc: undefined },
+            { day: 8, wbc: undefined },
+            { day: 9, wbc: undefined },
+            { day: 10, wbc: undefined },
         ];
 
         const EVENTS = [
             { day: -5.5, dayEnd: -1.5, label: "Chemo", type: "box", color: "#f59e0b", fill: "rgba(245, 158, 11, 0.16)" },
             { day: 3.5, dayEnd: 5.5, label: "Chemo", type: "box", color: "#f59e0b", fill: "rgba(245, 158, 11, 0.16)" },
-            { day: 0, label: "Transplant", type: "line", color: "#9f7aea" },
+            { day: -.5, dayEnd: 0.5, label: "Transplant", type: "box", color: "#9f7aea" },
         ];
     </script>
 
@@ -413,7 +425,8 @@
     <script>
         const latest = READINGS[READINGS.length - 1];
         const wbc = latest?.wbc ?? null;
-        const color = wbc === null ? "#999" : wbc >= 0.5 ? "#22c55e" : wbc >= 0.1 ? "#f59e0b" : "#ef4444";
+        //const color = wbc === null ? "#999" : wbc >= 0.5 ? "#22c55e" : wbc >= 0.1 ? "#f59e0b" : "#ef4444";
+        const color = "#22c55e";
         const transplantDate = parseLocalDate(TRANSPLANT_DATE);
         const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'numeric', day: 'numeric' });
         const updatedFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -527,12 +540,11 @@
                     backgroundColor: color + '14',
                     fill: false,
                     tension: 0,
-                    pointBackgroundColor: (ctx) =>
-                        ctx.dataIndex === READINGS.length - 1 ? color : '#fff',
+                    pointBackgroundColor: '#fff',
                     pointBorderColor: color,
-                    pointRadius: (ctx) => ctx.dataIndex === READINGS.length - 1 ? 5 : 3,
-                    pointHoverRadius: 6,
-                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                    borderWidth: 3,
                 }]
             },
             options: {
