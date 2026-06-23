@@ -430,7 +430,7 @@
         const transplantDate = parseLocalDate(TRANSPLANT_DATE);
         const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'numeric', day: 'numeric' });
         const updatedFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        const compactChart = window.matchMedia('(max-width: 560px)').matches;
+        const compactChart = window.matchMedia('(max-width: 600px)').matches;
 
         // Compute x-axis range across readings + events
         const allDays = [
@@ -470,7 +470,7 @@
             if (!Number.isInteger(day)) return false;
             if (!compactChart) return true;
 
-            return day % 4 === 0;
+            return day % 3 === 0;
         }
 
         const eventLegend = document.getElementById('event-legend');
@@ -572,6 +572,8 @@
                             autoSkip: false,
                             color: '#888',
                             font: { size: compactChart ? 9 : 10 },
+                            maxRotation: compactChart ? 0 : 0,
+                            minRotation: compactChart ? 0 : 0,
                             stepSize: 1,
                             callback: v => shouldShowAxisLabel(v) ? formatRelativeDay(v) : ''
                         },
